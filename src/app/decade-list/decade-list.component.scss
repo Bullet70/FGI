@@ -11,6 +11,13 @@
   right: 0;
 }
 
+.text-container {
+	display: block;
+	left: 0;
+	right: 0;
+	margin: 0 auto;
+}
+
 // Pagine HTML flipbook
 .flipbook-page {
 	background-image: url("/viewer/assets/img/paper.jpg");
