@@ -6,7 +6,7 @@
         <div *ngFor="let d of 10 | range" class="p-2" style="width: 50%">
           <h3>
             <a (click)="ctx.switchToPage((d*2) + 1)">{{ ctx.decade + d }}</a>
-          	<span style="left: 12%" *ngIf="!hasMagazine(ctx.decade + d)">Non ci sono riviste per l'anno</span>
+          	<span class="text-container" *ngIf="!hasMagazine(ctx.decade + d)">Non ci sono riviste per l'anno</span>
           </h3>
         </div>
       </div>
@@ -22,7 +22,7 @@
 <!--             <a *ngIf="mode" [routerLink]="['/book', ctx.decade + ctx.decadePages[pnum - 1], 6 + i + 1, 0]"> -->
 <!--               <span>{{ m }} {{ ctx.decade + ctx.decadePages[pnum - 1]}} v.2</span> -->
 <!--             </a> -->
-          	<span style="left: 30%" *ngIf="!hasMagazine(ctx.decade + ctx.decadePages[pnum - 1], 6 + i + 1)">Non ci sono riviste per il mese</span>
+          	<span class="text-container" *ngIf="!hasMagazine(ctx.decade + ctx.decadePages[pnum - 1], 6 + i + 1)">Non ci sono riviste per il mese</span>
           </h3>
         </div>
       </div>
@@ -36,7 +36,7 @@
 <!--             <a *ngIf="mode" [routerLink]="['/book', ctx.decade + ctx.decadePages[pnum - 1], i + 1, 0]"> -->
 <!--               <span>{{ m }} {{ ctx.decade + ctx.decadePages[pnum - 1]}} v.1</span> -->
 <!--             </a> -->
-          	<span style="left: 30%" *ngIf="!hasMagazine(ctx.decade + ctx.decadePages[pnum - 1], i + 1)">Non ci sono riviste per il mese</span>
+          	<span class="text-container" *ngIf="!hasMagazine(ctx.decade + ctx.decadePages[pnum - 1], i + 1)">Non ci sono riviste per il mese</span>
           </h3>
         </div>
       </div>
