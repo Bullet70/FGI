@@ -1,0 +1,25 @@
+<div id="tl-container">
+  <ng-scrollbar class="tl-scrollable" barClass="scroll-bar" thumbClass="scroll-thumbs" 
+      [autoHide]="true" [autoUpdate]="true" [disableOnBreakpoints]="false" [trackX]="true" [trackY]="false">
+    <div class="tl-step" *ngFor="let d of numDecades | range" [ngClass]="{
+        'active': selectedDecade == d      
+      }"
+          (click)="onClick(d)">
+      <div class="tl-circle">
+        <h2 class="tl-circle-title">{{ (startDecade + 10*d) }}-{{ (startDecade + 10*d) + 9 }}</h2>
+      </div>
+    </div>
+    <div id="tl-line"></div>
+  </ng-scrollbar>
+</div>
+
+<!-- <div class="tl-content-container">
+  <div class="tl-content" data-tl-id="<?= $decade ?>">
+    <div class="tl-decadelist">
+      <?php include "mobile-scroller.php"; ?>
+    </div>
+    <div class="tl-flipbook">
+      <?php include "decade-flipbook.php"; ?>
+    </div>
+  </div>
+</div> -->

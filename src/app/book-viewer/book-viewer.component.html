@@ -1,0 +1,34 @@
+<!-- <div class="padded-content"> -->
+<!--   <div class="container text-center" *ngIf="state == 0"> -->
+<!--     <ngb-alert type="secondary" [dismissible]="false"> -->
+<!--       <h1><fa-icon [icon]="faSpinner" [spin]="true"></fa-icon></h1> -->
+<!--       <h4>Caricamento...</h4> -->
+<!--     </ngb-alert> -->
+<!--   </div> -->
+  
+<!--   <div class="container text-center" *ngIf="state == 1 && pages.length == 0"> -->
+<!--     <ngb-alert type="danger" [dismissible]="false"> -->
+<!--       <h1><fa-icon [icon]="faExclamationTriangle"></fa-icon></h1> -->
+<!--       <h4>Rivista non trovata</h4> -->
+<!--     </ngb-alert> -->
+<!--   </div> -->
+<!-- </div> -->
+
+<!-- <div *ngIf="state == 1 && pages.length != 0" style="height: 90vh; width: 100vw; position: relative; overflow: hidden;"> -->
+  <ng-template #pageTpl let-pnum="pnum" let-ctx="ctx">
+    <flipbook-bookpage (onClick)="ctx.onPageClick($event)" [pageNum]="pnum" [image]="ctx.pages[pnum]"></flipbook-bookpage>
+  </ng-template>
+
+<!--   <div style="width: 100%; height: 100%;" [ngClass]="{ -->
+<!--     'hidden': zoomedPage != null -->
+<!--   }"> -->
+<!-- 	<button class="btn btn-light btn-lg left" (click)="goBack()"> -->
+<!-- 		<fa-icon [icon]="prevPageIcon"></fa-icon> -->
+<!-- 	</button> -->
+    <flipbook-generic [template]="pageTpl" [numPages]="pages.length" (currentPageChange)="currentPageChange.emit($event)" [currentPage]="currentPage" [context]="{
+      pages: pages, 
+      onPageClick: onPageClick.bind(this)
+     }" [buttonsOnBottom]="true"></flipbook-generic> 
+<!--   </div> -->
+<!--   <flipbook-zoom *ngIf="zoomedPage != null" [url]="pages[zoomedPage].url" (onBackClick)="onPageClick(null)"></flipbook-zoom> -->
+<!-- </div> -->

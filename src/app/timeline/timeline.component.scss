@@ -1,0 +1,175 @@
+@import "../../../node_modules/bootstrap/scss/functions";
+@import "../../../node_modules/bootstrap/scss/variables";
+@import "../../../node_modules/bootstrap/scss/mixins";
+
+$primary:       $blue !default;
+$secondary:     $gray-600 !default;
+$success:       $green !default;
+$info:          $cyan !default;
+$warning:       $yellow !default;
+$danger:        $red !default;
+$light:         $gray-100 !default;
+$dark:          $gray-800 !default;
+
+$body-bg: $dark;
+$body-color: $white;
+$list-group-bg: transparent;
+$list-group-action-color: $white;
+
+$grid-float-breakpoint:1px; 
+$screen-xs:1px;
+$screen-sm:2px;
+$screen-md:3px;
+$screen-lg:9999px;
+
+#tl-container {  
+  position: absolute;
+  left: 0em;
+  right: 0em;
+  bottom: 1em;
+  height: 7em;
+  margin: 0;
+  padding-left: 12vw;
+  overflow: auto;
+}
+
+.tl-scrollable {
+  white-space: nowrap;
+  z-index: 1;
+}
+
+#tl-line {
+  position: fixed;  // Workaround, dovrebbe essere absolute
+  top: calc(50% - 11px);
+  height: 4px;
+  width: 100em;
+  left: 0em;
+  background-color: #ebc32d;
+  right: -100em;  // Workaround, dovrebbe essere 0em
+}
+
+.tl-step {
+  display: inline-block;
+  vertical-align: middle;
+  position: relative;
+  margin-left: 2em;
+  margin-right: 2em;
+  top: calc(50% - 35px);
+  z-index: 9999;
+}
+
+.tl-step .tl-circle {
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select:none;
+  cursor: pointer;
+  width: 50px;
+  height: 50px;
+  border: 4px solid #ebc32d;
+  background: #dcd9ca;
+  border-radius: 50%;
+  text-align: center;
+  font-size: 12px;
+  box-shadow: 0 0 2px rgba(0,0,0,.1);
+  -webkit-transition: all 0.5s ease-in;
+  -moz-transition: all 0.5s ease-in;
+  -ms-transition: all 0.5s ease-in;
+  -o-transition: all 0.5s ease-in;
+  transition: all 0.5s ease-in;
+  position: relative;
+  top: 0;
+}
+
+.tl-step.active .tl-circle {
+  //background: $primary;
+  background: #1a3183;
+}
+
+.tl-step .tl-circle h2.tl-circle-title {
+  top: 50px;
+  position: absolute;
+  left: -50px;
+  right: -50px;
+  -webkit-transition: all 0.5s ease-in;
+  -moz-transition: all 0.5s ease-in;
+  -ms-transition: all 0.5s ease-in;
+  -o-transition: all 0.5s ease-in;
+  transition: all 0.5s ease-in;
+  font-size: 18px;
+	color: black;
+	font-weight: bold;
+	text-decoration: underline;
+}
+
+.tl-step.active .tl-circle h2.tl-circle-title {
+  /*color: $primary;*/
+  font-size: 25px;
+}
+
+@media (min-width: 768px) { 
+  .tl-decadelist {
+    display: none;
+  }
+
+  .tl-flipbook {
+    display: block;
+  }
+}
+
+@media (max-width: 767.9px) { 
+  .tl-decadelist {
+    display: block;
+  }
+
+  .tl-flipbook {
+    display: none;
+  }
+}
+
+.tl-decadelist, .tl-flipbook {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.tl-decadelist {
+  overflow: auto;
+}
+
+.tl-flipbook {
+  overflow: hidden;
+}
+
+.tl-content {
+  visibility: hidden;
+  opacity: 0;
+}
+
+.tl-content.active {
+  visibility: initial;
+  opacity: 1;
+  -webkit-transition: all 0.5s ease-in;
+  -moz-transition: all 0.5s ease-in;
+  -ms-transition: all 0.5s ease-in;
+  -o-transition: all 0.5s ease-in;
+  transition: all 0.5s ease-in;
+}
+
+::ng-deep {
+  .scroll-bar {
+    border-radius: 4px;
+  }
+  .scroll-thumbs {
+    background-color: rgba(192, 192, 192, 0.4) !important;
+    &:hover,
+    &:active {
+      background-color: rgba(192, 192, 192, 0.7) !important;
+    }
+  }
+  .ng-scrollbar-view {
+  	padding-bottom: 0 !important;
+  }
+}

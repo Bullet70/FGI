@@ -1,0 +1,68 @@
+.hidden {
+    display: none;
+}
+
+.btn.left {
+	position: absolute;
+	left: 13em;
+  	z-index: 999;
+}
+
+#book-container {
+//	height: 90vh;
+	width: 70vw;
+	position: relative;
+	overflow: hidden;
+	margin: 0 auto;
+	padding-top: 4vh;
+}
+
+#book, .magazine {
+	margin: auto !important;
+//	height: 620px;
+}
+
+::ng-deep .hidden {
+	visibility: hidden;
+}
+
+.magazine {
+	height: 90vh;
+	width: 100vw;
+	position: relative;
+	overflow: hidden;
+}
+
+::ng-deep #book .next, ::ng-deep #book .previous {
+	width:22px;
+	height:80vh;
+	max-height: 620px;
+	position:absolute;
+	top:0;
+}
+
+::ng-deep #book .next {
+	right:-22px;
+	-webkit-border-radius:0 15px 15px 0;
+	-moz-border-radius:0 15px 15px 0;
+	-ms-border-radius:0 15px 15px 0;
+	-o-border-radius:0 15px 15px 0;
+	border-radius:0 15px 15px 0;
+	background-image:url(https://dev.esinware.it/federginnastica/assets/img/arrows.png);
+	background-position:-38px 50%;
+	background-repeat:no-repeat;
+	background-color:rgba(0,0,0, 0.4);
+}
+
+::ng-deep #book .previous {
+	left:-22px;
+	-webkit-border-radius:15px 0 0 15px;
+	-moz-border-radius:15px 0 0 15px;
+	-ms-border-radius:15px 0 0 15px;
+	-o-border-radius:15px 0 0 15px;
+	border-radius:15px 0 0 15px;
+	background-image:url(https://dev.esinware.it/federginnastica/assets/img/arrows.png);
+	background-position:-4px 50%;
+	background-repeat:no-repeat;
+	background-color:rgba(0,0,0, 0.4);
+}

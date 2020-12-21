@@ -1,0 +1,35 @@
+<div class="padded-content" *ngIf="state != 1">
+  <div class="container text-center" *ngIf="state == 0">
+    <ngb-alert type="secondary" [dismissible]="false">
+      <h1><fa-icon [icon]="faSpinner" [spin]="true"></fa-icon></h1>
+      <h4>Caricamento...</h4>
+    </ngb-alert>
+  </div>
+  
+  <div class="container text-center" *ngIf="state == 2">
+    <ngb-alert type="danger" [dismissible]="false">
+      <h1><fa-icon [icon]="faExclamationTriangle"></fa-icon></h1>
+      <h4>Rivista non trovata</h4>
+    </ngb-alert>
+  </div>
+</div>
+<div id="book-container" [ngClass]="{'hidden': zoomedPage != null}">
+  <div>
+		<button class="btn btn-light btn-lg left" (click)="goBack()">
+			<fa-icon [icon]="prevPageIcon"></fa-icon>
+		</button>
+<!--     <flipbook-generic [template]="pageTpl" [numPages]="this.img.length" [currentPage]="this.currentPage" [context]="{pages: img, onPageClick: onPageClick.bind(this)}" [buttonsOnBottom]="true"></flipbook-generic> -->
+  </div>
+	<div id="flipbook" [ngClass]="{'hidden': zoomedPage != null}">
+		<app-turn-viewer *ngIf="mode" [year]="year" [month]="month" [(currentPage)]="currentPage" (zoomedPage)="zoomedPage = $event" (state)="state = $event"></app-turn-viewer>
+		<app-book-viewer *ngIf="!mode" [year]="year" [month]="month" [(currentPage)]="currentPage" (state)="changeState($event)" (zoomedPage)="zoomedPage = $event"></app-book-viewer>
+<!-- 		<ng-container *ngFor="let page of loaded; index as i"> -->
+<!-- 			<div *ngIf="page" class="page {{(i % 2) == 0 ? 'odd' : 'even'}} p{{i}}" id="page-{{i}}" (click)="onPageClick(i)"> -->
+<!-- 				<img src="{{page}}"/> -->
+<!-- 			</div> -->
+<!-- 		</ng-container> -->
+	</div>
+</div>
+<div *ngIf="zoomedPage != null" class="zoom">
+	<flipbook-zoom *ngIf="zoomedPage != null" [url]="zoomedPage" (onBackClick)="onPageClick(null)"></flipbook-zoom>
+</div>

@@ -1,0 +1,9 @@
+.hidden {
+  display: none;
+}
+
+.btn.left {
+	position: absolute;
+	left: 13em;
+  z-index: 999;
+}

@@ -1,0 +1,25 @@
+<div class="padded-content">
+  <div class="col-12 justify-content-center" *ngIf="searchResults != null && searchResults.numFound != 0">
+    <ngb-pagination [collectionSize]="searchResults.numFound" [page]="page" (pageChange)="doSearch($event)" [maxSize]="5" [boundaryLinks]="true"></ngb-pagination>
+  </div>
+  
+  <div class="container text-center" *ngIf="searching == true">
+    <ngb-alert type="secondary" [dismissible]="false">
+      <h1><fa-icon [icon]="faSpinner" [spin]="true"></fa-icon></h1>
+      <h4>Ricerca in corso...</h4>
+    </ngb-alert>
+  </div>
+  
+  <div *ngIf="searching == false">
+    <h1 class="text-center" *ngIf="searchResults != null && searchResults.numFound == 0">Nessun risultato trovato</h1>
+    <h1 class="text-center" *ngIf="searchResults == undefined">Errore di ricerca</h1>
+  	
+    
+	<div class="list-group" *ngIf="searchResults">
+		<a *ngFor="let item of searchResults.resultSet" class="list-group-item list-group-item-action flex-column align-items-start" [routerLink]="['/browser', item.values.year[0], item.values.month[0], item.values.page[0]]">
+	   		<div class="d-flex w-100 justify-content-between"><h5 class="mb-1">{{ item.values.title[0] }}</h5></div>
+	        <p class="mb-1" innerHTML="{{ item.values.abstract[0] }}" style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;"></p>
+		</a>
+	</div>
+  </div>
+</div>

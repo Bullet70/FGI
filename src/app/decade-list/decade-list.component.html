@@ -1,0 +1,68 @@
+<!-- CONTAINER -->
+<div class="tl-content-container" *ngIf="decadeShown != null && mobile == false">
+  <ng-template #pageTpl let-pnum="pnum" let-ctx="ctx">
+    <div *ngIf="pnum == 0" class="flipbook-page">
+      <div class="d-flex align-content-stretch flex-wrap" style="height: 100%; width: 100%;">
+        <div *ngFor="let d of 10 | range" class="p-2" style="width: 50%">
+          <h3>
+            <a (click)="ctx.switchToPage((d*2) + 1)">{{ ctx.decade + d }}</a>
+          	<span style="left: 12%" *ngIf="!hasMagazine(ctx.decade + d)">Non ci sono riviste per l'anno</span>
+          </h3>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="pnum != 0" class="flipbook-page">
+      <div *ngIf="pnum % 2 == 0" class="d-flex align-content-stretch flex-wrap" style="height: 100%; width: 100%;">
+        <div *ngFor="let m of ctx.monthsRight; let i = index" class="p-2" style="width: 100%">
+          <h3>
+            <a *ngIf="!mode" [routerLink]="['/browser', ctx.decade + ctx.decadePages[pnum - 1], 6 + i + 1, 0]">
+              <span>{{ m }} {{ ctx.decade + ctx.decadePages[pnum - 1]}}</span>
+            </a>
+<!--             <br/> -->
+<!--             <a *ngIf="mode" [routerLink]="['/book', ctx.decade + ctx.decadePages[pnum - 1], 6 + i + 1, 0]"> -->
+<!--               <span>{{ m }} {{ ctx.decade + ctx.decadePages[pnum - 1]}} v.2</span> -->
+<!--             </a> -->
+          	<span style="left: 30%" *ngIf="!hasMagazine(ctx.decade + ctx.decadePages[pnum - 1], 6 + i + 1)">Non ci sono riviste per il mese</span>
+          </h3>
+        </div>
+      </div>
+      <div *ngIf="pnum % 2 != 0" class="d-flex align-content-stretch flex-wrap" style="height: 100%; width: 100%;">
+        <div *ngFor="let m of ctx.monthsLeft; let i = index" class="p-2" style="width: 100%">
+          <h3>
+            <a *ngIf="!mode" [routerLink]="['/browser', ctx.decade + ctx.decadePages[pnum - 1], i + 1, 0]">
+              <span>{{ m }} {{ ctx.decade + ctx.decadePages[pnum - 1]}}</span>
+            </a>
+<!--             <br/> -->
+<!--             <a *ngIf="mode" [routerLink]="['/book', ctx.decade + ctx.decadePages[pnum - 1], i + 1, 0]"> -->
+<!--               <span>{{ m }} {{ ctx.decade + ctx.decadePages[pnum - 1]}} v.1</span> -->
+<!--             </a> -->
+          	<span style="left: 30%" *ngIf="!hasMagazine(ctx.decade + ctx.decadePages[pnum - 1], i + 1)">Non ci sono riviste per il mese</span>
+          </h3>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+
+  <flipbook-generic [(currentPage)]="currentPage" [template]="pageTpl" [numPages]="21" [context]="{
+    decade: (decadeShown*10) + 1900,
+    decadePages: [0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9],
+    monthsLeft: ['Gennaio', 'Febbraio', 'Marzo', 'Aprile', 'Maggio', 'Giugno'],
+    monthsRight: ['Luglio', 'Agosto', 'Settembre', 'Ottobre', 'Novembre', 'Dicembre'],
+    switchToPage: switchToPage.bind(this)
+  }"></flipbook-generic>
+</div>
+
+<div class="tl-content-container padded-content" *ngIf="decadeShown != null && mobile == true" style="overflow: auto">
+  <div class="list-group" *ngFor="let y of 10 | range">
+    <a *ngFor="let m of ['Gennaio', 'Febbraio', 'Marzo', 'Aprile', 'Maggio', 'Giugno', 'Luglio', 'Agosto', 'Settembre', 'Ottobre', 'Novembre', 'Dicembre']; let i = index"
+        class="list-group-item list-group-item-action flex-column align-items-start"
+        [routerLink]="['/browser', (1900 + (decadeShown*10) + y), i + 1, 0]">
+      <div class="d-flex w-100 justify-content-between">
+        <h5 class="mb-1">{{ m }} {{ 1940 + decadeShown*10 + y }}</h5>
+      </div>
+    </a>
+  </div>
+</div>
+
+<!-- TIMELINE -->
+<!-- <timeline [selectedDecade]="decadeShown" (selectedDecadeChange)="onSelectedDecadeChange($event)"></timeline> -->

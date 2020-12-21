@@ -1,0 +1,217 @@
+.flipbook-container {
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  margin: 0 auto;
+  left: 0;
+  transition: 0.5s;
+}
+
+@media screen and (max-width: 900px) {
+  .flipbook-container {
+    width: 60%;
+  }
+}
+
+@media screen and (min-width: 900px) {
+  .flipbook-container {
+    width: 80%;
+  }
+
+  .flipbook-container.firstpage {
+    left: -15%;
+  }
+
+  .flipbook-container.lastpage {
+    left: 15%;
+  }
+}
+
+// Contenitore
+.flip-container {
+  perspective: 1000px;
+  max-height: 100%;
+  max-width: 100%;
+  position: absolute;
+  margin: auto;
+  right: 0;
+  top: 3em;
+  bottom: 5em;
+  z-index: 1;
+}
+
+.flip-container.hidden {
+  z-index: 0;
+}
+
+.flip-container.flipping {
+  z-index: 999;
+}
+
+@media screen and (min-width: 900px) {
+  .flip-container {
+    left: 50%;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .flip-container {
+    left: 3em;
+  }
+}
+
+.flip-container .flipper {
+  transform-origin: 0% 100%;
+  opacity: 1;
+  height: 100%;
+  transform-style: preserve-3d;
+  position: relative;
+  // background-color: rgb(0, 0, 59);
+}
+
+// Pagina girata
+.flip-container.flipped .flipper {
+  transform: rotateY(-180deg);
+  opacity: 1;
+  // background-color: rgb(21, 43, 0);
+}
+
+.flip-container.flippable .flipper {
+  transition: transform 0.6s;
+  // background-color: red;
+}
+
+.flip-container.flippable.flipping .flipper {
+  transform: rotateY(-180deg);
+  opacity: 1;
+}
+
+.flip-container.hidden .flipper {
+  opacity: 0;
+}
+
+// .flip-container.flipping.LTR .flipper {
+//   transform: rotateY(-180deg);
+//   opacity: 1;
+// }
+
+// .flip-container.flipping.RTL .flipper {
+//   transform: rotateY(0);
+//   opacity: 1;
+// }
+
+.flip-container.hidden .flipper {
+  opacity: 0;
+}
+
+@media screen and (max-width: 900px) {
+  .flip-container {
+    transition: opacity 0.3s;
+    opacity: 1;
+  }
+
+  .flip-container.flipped, .flip-container.flipping.LTR {
+    opacity: 0;
+  }
+}
+
+/* hide back of pane during swap */
+.front, .back {
+  backface-visibility: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;   // Proporzione A4 + Piccolo margine
+}
+
+/* front pane, placed above back */
+.front {
+    /* for firefox 31 */
+  transform: rotateY(0deg);
+  transition: transform 1s;
+  background-position: left center;
+}
+
+/* back, initially hidden pane */
+.back {
+  transform: rotateY(180deg);
+/*   transition: transform 2s; */
+  background-position: right center;
+}
+
+.front img, .back img {
+  max-width:100%;
+  max-height:100%;
+  //position: absolute;
+  margin: auto;
+  top: 0;
+  bottom: 0;
+}
+
+.back img {
+  float: right;
+}
+
+@media screen and (min-width: 900px) {
+  .front img {
+    left: 0;
+  }
+  
+  .back img {
+    right: 0;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .front img, .back img {
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+}
+
+// Bottoni cambio pagina
+.button-container {
+	padding-left: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: calc(100% - 200px);
+  height: 100%;
+  position: absolute;
+}
+
+.button-container button {
+  position: absolute;
+}
+
+.button-container button.left {
+  left: 4em;
+}
+
+.button-container button.right {
+  right: 4em;
+}
+
+.button-container-bottom {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  position: absolute;
+  bottom: 2em;
+  left: 0;
+  right: 0;
+  height: 2em;
+  z-index: 999;
+}
+
+::ng-deep .btn-light {
+	background-color: #ebc32d;
+}
+
+::ng-deep .btn-light:hover {
+	background-color: #1a3183;
+	color: #dcd9ca;
+}

@@ -1,0 +1,68 @@
+<div class="root">
+	<div class="sidebar" [ngClass]="{'toggled': sidebarToggled == false}">
+		<ul class="nav flex-column">
+			<a href="https://www.federginnastica.it" target="_blank">
+				<img src="https://www.federginnastica.it/images/logo-fgi_circolare.png"
+				style="width: 100%; padding: 1em; object-fit: contain;" />
+			</a>
+			<li class="nav-item" style="padding: 1em">
+				<form class="form-inline my-2 my-lg-0" method="GET"
+					(ngSubmit)="doSearch()">
+					<div class="input-group">
+						<input name="searchQuery" type="text" class="form-control"
+							[(ngModel)]="searchQuery" placeholder="Cerca nell'archivio..."
+							aria-label="Cerca nell'archivio..." />
+						<div class="input-group-append">
+							<button class="btn btn-primary" type="submit">
+								<fa-icon [icon]="faSearch"></fa-icon>
+							</button>
+						</div>
+					</div>
+				</form>
+			</li>
+			<li class="nav-item"><a class="nav-link" [routerLink]="['/']">Sfoglia la rivista</a></li>
+			<li class="nav-item">
+				<!--a class="nav-link" [routerLink]="['/']" (click)="doLogout();">Logout</a-->
+				<a class="nav-link" href="/federginnastica/wp-login.php?action=logout">Logout</a>
+			</li>
+		</ul>
+		<div style="color: black;">
+			<div><h3>Sfondo</h3></div>
+			<div (click)="change('1')" style="float:left;padding: 3px;cursor:crosshair;">1</div>
+			<div (click)="change('2')" style="float:left;padding: 3px;cursor:crosshair;">2</div>
+			<div (click)="change('3')" style="float:left;padding: 3px;cursor:crosshair;">3</div>
+			<div (click)="change('4')" style="float:left;padding: 3px;cursor:crosshair;">4</div>
+			<div (click)="change('5')" style="float:left;padding: 3px;cursor:crosshair;">5</div>
+			<div (click)="change('6')" style="float:left;padding: 3px;cursor:crosshair;">6</div>
+			<div (click)="change('7')" style="float:left;padding: 3px;cursor:crosshair;">7</div>
+			<div (click)="change('8')" style="float:left;padding: 3px;cursor:crosshair;">8</div>
+		</div>
+		<div class="sponsor" style="clear: both;">
+<!-- 			<div class="btn-group btn-group-toggle" ngbRadioGroup name="radioBasic" [(ngModel)]="viewMode"> -->
+<!-- 			  <label ngbButtonLabel class="btn-primary"> -->
+<!-- 			    <input ngbButton type="radio" (click)="switchMode(false)" [value]="false"> Classico -->
+<!-- 			  </label> -->
+<!-- 			  <label ngbButtonLabel class="btn-primary"> -->
+<!-- 			    <input ngbButton type="radio" (click)="switchMode(true)" [value]="true"> Avanzato -->
+<!-- 			  </label> -->
+<!-- 			</div> -->
+<!-- 			<a href="https://www.fondazioneterzopilastrointernazionale.it" target="_blank"> -->
+<!-- 				<span>Progetto finanziato da</span> -->
+<!-- 				<img src="/scherma/assets/img/fondazione3pilastro.jpg" /> -->
+<!-- 			</a> -->
+			<a target="_blank" href="http://www.esinware.it" class="esinware">Realizzazione	a cura di<br />Esinware S.r.l.</a>
+		</div>
+	</div>
+
+	<button class="btn btn-outline-secondary btn-lg sidebar-toggle"
+		(click)="toggleSidebar()">
+		<fa-icon [icon]="faBars"></fa-icon>
+	</button>
+	<div class="main-content" [style.background-image]="bgImage">
+		<div class="content">
+			<router-outlet (activate)="onActivation($event)"></router-outlet>
+			<!-- TIMELINE -->
+			<timeline *ngIf="showTimeline" [selectedDecade]="selectedDecade" (selectedDecadeChange)="onSelectedDecadeChange($event)"></timeline>
+		</div>
+	</div>
+</div>

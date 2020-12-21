@@ -1,0 +1,129 @@
+$sidebar-width: 15em;
+
+.root {
+	display: flex;
+	flex-direction: row;
+}
+
+@media only screen and (max-width: 900px) {
+	.sidebar.toggled {
+		display: none;
+	}
+}
+
+.sidebar-darken {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 0;
+  width: 0;
+  background-color: rgba(0,0,0,0.5);
+  z-index: 100;
+  -webkit-transition: opacity 0.5s ease;
+  -moz-transition: opacity 0.5s ease;
+  -o-transition: opacity 0.5s ease;
+  transition: opacity 0.5s ease;
+  opacity: 0;
+}
+
+.sidebar-darken.toggled {
+  height: 100vh;
+  width: 100vw;
+  opacity: 0;
+}
+
+.sidebar {
+/*   position: absolute; */
+/*   top: 0; */
+/*   bottom: 0; */
+/*   left: -$sidebar-width; */
+/*   width: $sidebar-width; */
+  background-color: white;
+  -webkit-box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.75);
+  -moz-box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.75);
+  box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.75);
+
+/*   -webkit-transition: left 0.5s ease, opacity 0.2s ease; */
+/*   -moz-transition: left 0.5s ease, opacity 0.2s ease; */
+/*   -o-transition: left 0.5s ease, opacity 0.2s ease; */
+/*   transition: left 0.5s ease, opacity 0.2s ease; */
+
+/*   opacity: 0; */
+/*   z-index: 101; */
+	width: 12vw;
+	height: 100vh;
+	z-index: 1000;
+}
+
+.sidebar.toggled {
+/*   left: 0; */
+/*   opacity: 1; */
+}
+
+.nav-item {
+  padding: 0 0.5em;
+}
+
+.nav-item a {
+  color: black;
+}
+
+.nav-item a:hover {
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.nav-link {
+	padding: 0 1rem;
+}
+
+.sidebar-toggle {
+  position: absolute;
+  top: 1em;
+  left: 1em;
+  z-index: 99;
+}
+
+.sponsor {
+	width: 11vw;
+	position: absolute;
+	color: #1a3183 !important;
+	bottom: 0px;
+	text-align: center;
+}
+
+.sponsor img {
+	width: 11vw;
+}
+
+.sponsor a {
+	display: block;
+}
+
+.esinware {
+	text-decoration: none;
+	margin: 3px;
+}
+
+.main-content {
+	width: 87vw;
+	height: 100vh;
+//	background-image: url("https://dev.esinware.it/federginnastica/assets/img/sfondo-ginnasta.jpg");
+//  background: url("/assets/img/sfondo-ginnasta.jpg") no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.content {
+	background-color: rgba(255, 255, 255, 0.5);
+	height: 100vh;
+}
+
+.sponsor span {
+	display: block;
+}
+
+.btn-primary.btn.active {
+	background-color: red;
+}

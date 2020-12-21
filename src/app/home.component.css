@@ -1,0 +1,64 @@
+.inccont {
+	position: relative;
+	height: 90vh;
+}
+
+.incipit img {
+	display: inline;
+	margin-top: .5em;
+	margin-bottom: .5em;
+}
+
+.text {
+	font-size: 19pt;
+	/*color: #ebc32d !important;*/
+	color: black;
+	text-align: center;
+}
+
+.incipit {
+	position: absolute;
+	right: 4rem;
+	width: 45vw;
+	margin-top: 1.5em !important;
+}
+
+.incipit h1, .incipit h2, .incipit h3, .incipit h4 {
+/* 	font-weight: initial; */
+}
+
+.text h3 {
+	font-weight: bolder;
+}
+
+.incipit h1 {
+	font-weight: bold;
+	font-size: 1.7em;
+	color: #ebc32d !important;
+	padding: .3em;
+}
+
+.sx {
+	clear: both;
+	position: absolute;
+	padding-left: 2vw;
+	width: 25vw;
+	bottom: 5rem;
+	font-style: italic;
+}
+
+.oneline {
+	word-break: none;
+}
+
+@media only screen and (max-width: 1366px) {
+	h3 {
+		font-size: 1.4rem;
+	}
+}
+
+@media only screen and (max-width: 900px) {
+	h3 {
+		font-size: 1rem;
+	}
+}

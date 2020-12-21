@@ -1,0 +1,14 @@
+{
+  "/federginnastica/*": {
+    "target": "https://dev.esinware.it",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  "/lunar/*": {
+    "target": "https://dev.esinware.it",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  }
+}

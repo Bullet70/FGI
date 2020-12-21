@@ -1,0 +1,71 @@
+.hidden {
+  display: none;
+}
+
+.tl-content-container {
+  padding-left: 200px;
+  position: absolute;
+  top: 0;
+  bottom: 10em;
+  left: 0;
+  right: 0;
+}
+
+// Pagine HTML flipbook
+.flipbook-page {
+	background-image: url("/viewer/assets/img/paper.jpg");
+	text-align: center;
+  color: black;
+  width: 100%;
+  height: 100%;
+}
+
+.flipbook-page .p-2 {
+	//background-image: url("/viewer/assets/img/download.jpg");
+	background-size: 100%;
+	border: 1px solid white;
+	position: relative;
+	background-color: #182983;
+	opacity: .7;
+}
+
+.flipbook-page .p-2 a {
+//	position: absolute;
+	cursor: pointer;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+	vertical-align: middle;
+	margin: 0;
+	// line-height: 55px;
+	color: #ebc32d;
+	text-shadow: 0 0 5px #000000;
+}
+
+.flipbook-page .p-2 a span {
+	position: relative;
+  top: 35%;
+  font-weight: bold;
+}
+
+.flipbook-page.magazine img {
+	width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.flipbook-page.magazine .loading {
+	top: calc(50% - 70px);
+  position: relative;
+}
+
+.flipbook-page h3 > span {
+	position: absolute;
+	color: #ebc32d;
+	font-size: 11pt;
+}
