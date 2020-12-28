@@ -18,8 +18,8 @@
 <!-- 	<div id="flipbook" [ngClass]="{'hidden': zoomedPage != null}"> -->
 		<div id="book">
 		<ng-container *ngFor="let page of loaded; index as i">
-			<div *ngIf="page" class="page {{(i % 2) == 0 ? 'odd' : 'even'}} p{{i}}" id="page-{{i}}">
-				<img src="{{page}}"/>
+			<div *ngIf="page" class="page {{(i % 2) == 0 ? 'odd' : 'even'}} p{{i+1}}" id="page-{{i+1}}">
+				<img src="{{page}}" (click)="onPageClick(page)"/>
 			</div>
 		</ng-container>
 		</div>

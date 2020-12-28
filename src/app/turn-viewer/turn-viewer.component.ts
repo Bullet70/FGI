@@ -4,6 +4,8 @@ import { BookPage } from '../book-page/book-page';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { faSpinner, faExclamationTriangle, faAngleLeft } from '@fortawesome/free-solid-svg-icons';
 import { AppComponent } from '../app.component';
+import { BookRange } from './dimension.obj';
+import { environment } from '../../environments/environment';
 declare var $: any;
 
 @Component({
@@ -26,41 +28,37 @@ export class TurnViewerComponent implements OnInit, OnDestroy {
   @Output() zoomedPage: EventEmitter<string> = new EventEmitter<string>();
   prevPageIcon = faAngleLeft;
   referrer: string;
+	flipbook: any;
+	dimensions: BookRange = new BookRange();
 
   constructor(private mainService: MainService, private route: ActivatedRoute, private router: Router) {
     
   }
 
   ngOnInit() {
-//    this.route.params.subscribe((params) => {
-//      this.year = +params["year"];
-//      this.month = +params["month"];
-//      this.currentPage = +params["page"];
       this.mainService.getBookPagesArray(this.year, this.month).subscribe(pages => {
         this.img = pages;
 				this.state.emit(1);
 				this.loaded = new Array(this.img.length);
 				let start = (this.currentPage > 2) ? (this.currentPage - 2) : 0;
-				for(var index = start; index <= start + 5; index++) {
+				for(var index = start; index <= (start + 5); index++) {
 					this.loaded[index] = this.img[index];
 				}
+				this.currentPage = this.currentPage + 1;
 				let that = this;
 				$(window).ready(function() {
-					var height = 620;
-					if(that.year > 1950) {
-						height = 580;
-					}
-					$('#book').turn({
+					var size = that.dimensions.findSize(that.year);
+					that.flipbook = $('#book').turn({
 						pages: that.img.length,
-						page: that.currentPage + 1,
+						page: that.currentPage,
 						autocenter: true,
 						elevation: 20,
 						duration: 1500,
-						height: height
+						height: size.height,
+						width: size.width
 					});
 					$('#book').bind('turning', function(event, page) {
-						console.log('Turning for ' + page);
-						$('#book').append('<audio autoplay><source src=\"/assets/audio/flip.mp3\" type=\"audio/mpeg\"/></audio>');
+						$('#book').append('<audio autoplay><source src=\"' + environment.baseUrl + '/assets/audio/flip.mp3\" type=\"audio/mpeg\"/></audio>');
 					  that.addPage(page, $(this));
 					});
 					$('#book').bind('turned', function(event, page) {
@@ -72,37 +70,34 @@ export class TurnViewerComponent implements OnInit, OnDestroy {
 						} else if(page == that.img.length) {
 							$('.next').addClass('hidden')
 						}
-//						$('audio').remove();
+						$('audio').remove();
 					});
-					var previous = $('<div class=\"previous\" style=\"max-height: ' + height + 'px\">');
-					if(that.currentPage == 0)
+					
+					var previous = $('<div class=\"previous\" style=\"max-height: ' + size.height + 'px\">');
+					if(that.currentPage == 1)
 						previous.addClass('hidden');
-					var next = $('<div class=\"next\" style=\"max-height: ' + height + 'px\">');
-					if(that.currentPage == (that.img.length - 1))
+					var next = $('<div class=\"next\" style=\"max-height: ' + size.height + 'px\">');
+					if(that.currentPage == (that.img.length))
 						next.addClass('hidden');
 					$('#book').prepend(previous).append(next);
 					previous.click(function() {
 						that.currentPage = that.currentPage - 1;
-						that.currentPageChange.emit(that.currentPage);
+						that.currentPageChange.emit(that.currentPage - 1);
 						$('#book').turn('previous');
 					});
 					next.click(function() {
 						that.currentPage = that.currentPage + 1;
-						that.currentPageChange.emit(that.currentPage);
+						that.currentPageChange.emit(that.currentPage - 1);
 						$('#book').turn('next');
-					});
-					$('.page-wrapper div[id^=\'page-\'] img').on('click', function() {
-						that.onPageClick($(this).attr('src'));
 					});
       	});
 			});
-//    });
   }
 
 	ngOnDestroy() {
 		console.log('Destroying new browser');
-//		$('#book').turn('destroy');
-//		$('.previous, .next').remove();
+		this.flipbook.turn('destroy');
+		$('.previous, .next').remove();
 	}
 
 	addPage(page, book) {
@@ -111,7 +106,8 @@ export class TurnViewerComponent implements OnInit, OnDestroy {
 			if(!book.turn('hasPage', page)) {
 				var element = $('<div />', {'class': 'page ' + ((page%2==0) ? 'odd' : 'even'), 'id': 'page-'+page});
 	    	book.turn('addPage', element, page);
-				element.html('<img src="' + this.img[page - 1] + '"/>');
+				var image = $('<img src="' + this.img[page - 1] + '" />');
+				element.append(image);
 			} else {
 				console.log('Already loaded');
 			}
@@ -119,9 +115,6 @@ export class TurnViewerComponent implements OnInit, OnDestroy {
 	}
 
   onPageClick(pageNum) {
-//		if(pageNum == null) {
-//			$('#flipbook').turn('page', this.zoomedPage + 1);
-//		}
 		this.zoomedPage.emit(pageNum);
   }
   

@@ -6,6 +6,7 @@ import { Location } from '@angular/common';
 import { of } from 'rxjs';
 import { filter, pairwise } from 'rxjs/operators';
 import { MainService } from './main.service';
+import { environment } from '../environments/environment';
 
 @Component({
   selector: 'app-root',
@@ -26,7 +27,7 @@ export class AppComponent implements OnInit {
   showTimeline: boolean = true;
 	routeParams: any;
 	viewMode: boolean = true;
-	bgImage: string = 'url(\'/assets/img/sfondo-ginnasta.jpg\')';
+	bgImage: string = 'url(\'' + environment.baseUrl + '/assets/img/sfondo-ginnasta.jpg\')';
 
   constructor(private router: Router, private route: ActivatedRoute, private location: Location, private service: MainService) {
     this.selectedDecade = null;
@@ -62,7 +63,7 @@ export class AppComponent implements OnInit {
 	}
   
   doLogout() {
-	window.location.href = '/federginnastica/wp-login.php?action=logout';
+	window.location.href = environment.baseUrl + '/wp-login.php?action=logout';
   }
   
   doSearch() {
@@ -84,6 +85,6 @@ export class AppComponent implements OnInit {
 	}
 	
 	change(image: string) {
-		this.bgImage = 'url(\'/assets/img/' + image + '.jpg\')';
+		this.bgImage = 'url(\'' + environment.baseUrl + '/assets/img/' + image + '.jpg\')';
 	}
 }
