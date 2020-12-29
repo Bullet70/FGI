@@ -28,6 +28,7 @@ export class AppComponent implements OnInit {
 	routeParams: any;
 	viewMode: boolean = true;
 	bgImage: string = 'url(\'' + environment.baseUrl + '/assets/img/sfondo-ginnasta.jpg\')';
+	charClass: string = 'black';
 
   constructor(private router: Router, private route: ActivatedRoute, private location: Location, private service: MainService) {
     this.selectedDecade = null;
@@ -85,6 +86,13 @@ export class AppComponent implements OnInit {
 	}
 	
 	change(image: string) {
-		this.bgImage = 'url(\'' + environment.baseUrl + '/assets/img/' + image + '.jpg\')';
+		if(image)
+			this.bgImage = 'url(\'' + environment.baseUrl + '/assets/img/' + image + '.jpg\')';
+		else
+			this.bgImage = 'url(\'' + environment.baseUrl + '/assets/img/sfondo-ginnasta.jpg\')';
+		if(image == '8')
+			this.charClass = 'gold';
+		else
+			this.charClass = 'black';
 	}
 }

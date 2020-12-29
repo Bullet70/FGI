@@ -60,8 +60,6 @@ export class TurnViewerComponent implements OnInit, OnDestroy {
 					$('#book').bind('turning', function(event, page) {
 						$('#book').append('<audio autoplay><source src=\"' + environment.baseUrl + '/assets/audio/flip.mp3\" type=\"audio/mpeg\"/></audio>');
 					  that.addPage(page, $(this));
-					});
-					$('#book').bind('turned', function(event, page) {
 						if(page > 1 && page < that.img.length) {
 							$('.previous').removeClass('hidden');
 							$('.next').removeClass('hidden');
@@ -70,6 +68,8 @@ export class TurnViewerComponent implements OnInit, OnDestroy {
 						} else if(page == that.img.length) {
 							$('.next').addClass('hidden')
 						}
+					});
+					$('#book').bind('turned', function(event, page) {
 						$('audio').remove();
 					});
 					
@@ -107,9 +107,11 @@ export class TurnViewerComponent implements OnInit, OnDestroy {
 				var element = $('<div />', {'class': 'page ' + ((page%2==0) ? 'odd' : 'even'), 'id': 'page-'+page});
 	    	book.turn('addPage', element, page);
 				var image = $('<img src="' + this.img[page - 1] + '" />');
+				let that = this;
+				$(image).click(this.img[page - 1], function(event) {
+					that.onPageClick(event.data);
+				});
 				element.append(image);
-			} else {
-				console.log('Already loaded');
 			}
 		}
 	}

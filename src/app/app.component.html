@@ -36,6 +36,7 @@
 			<div (click)="change('6')" style="float:left;padding: 3px;cursor:pointer;">6</div>
 			<div (click)="change('7')" style="float:left;padding: 3px;cursor:pointer;">7</div>
 			<div (click)="change('8')" style="float:left;padding: 3px;cursor:pointer;">8</div>
+			<div (click)="change('')" style="clear:both;padding: 3px;cursor:pointer;">Reset</div>
 		</div>
 		<div class="sponsor" style="clear: both;">
 <!-- 			<div class="btn-group btn-group-toggle" ngbRadioGroup name="radioBasic" [(ngModel)]="viewMode"> -->
@@ -58,7 +59,7 @@
 		(click)="toggleSidebar()">
 		<fa-icon [icon]="faBars"></fa-icon>
 	</button>
-	<div class="main-content" [style.background-image]="bgImage">
+	<div class="main-content" [ngClass]="charClass" [style.background-image]="bgImage">
 		<div class="content">
 			<router-outlet (activate)="onActivation($event)"></router-outlet>
 			<!-- TIMELINE -->

@@ -33,5 +33,11 @@
 }
 
 .zoom {
+	position: relative;
 	height: 90vh;
+	z-index: 20;
 }
+
+//::ng-deep .zoom img {
+//	z-index: 10;
+//}
