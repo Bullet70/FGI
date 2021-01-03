@@ -1,35 +1,13 @@
-<!-- <div class="padded-content"> -->
-<!--   <div class="container text-center" *ngIf="state == 0"> -->
-<!--     <ngb-alert type="secondary" [dismissible]="false"> -->
-<!--       <h1><fa-icon [icon]="faSpinner" [spin]="true"></fa-icon></h1> -->
-<!--       <h4>Caricamento...</h4> -->
-<!--     </ngb-alert> -->
-<!--   </div> -->
-  
-<!--   <div class="container text-center" *ngIf="state == 1 && img.length == 0"> -->
-<!--     <ngb-alert type="danger" [dismissible]="false"> -->
-<!--       <h1><fa-icon [icon]="faExclamationTriangle"></fa-icon></h1> -->
-<!--       <h4>Rivista non trovata</h4> -->
-<!--     </ngb-alert> -->
-<!--   </div> -->
-<!-- </div> -->
-
-<!-- <div id="book-container" *ngIf="state == 1 && img.length != 0"> -->
-<!-- 	<div id="flipbook" [ngClass]="{'hidden': zoomedPage != null}"> -->
-		<div id="book">
-		<ng-container *ngFor="let page of loaded; index as i">
-			<div *ngIf="page" class="page {{(i % 2) == 0 ? 'odd' : 'even'}} p{{i+1}}" id="page-{{i+1}}">
-				<img src="{{page}}" (click)="onPageClick(page)"/>
+<div class="wrapper-book">
+  <div class="aspect">
+    <div class="aspect-inner">
+			<div id="book">
+			<ng-container *ngFor="let page of loaded; index as i">
+				<div *ngIf="page" class="page {{(i % 2) == 0 ? 'odd' : 'even'}} p{{i+1}}" id="page-{{i+1}}">
+					<img src="{{page}}" (click)="onPageClick(page)"/>
+				</div>
+			</ng-container>
 			</div>
-		</ng-container>
 		</div>
-<!-- 	</div> -->
-
-<!--   <div style="width: 100%; height: 100%;" [ngClass]="{'hidden': zoomedPage != null}"> -->
-<!-- 		<button class="btn btn-light btn-lg left" (click)="goBack()"> -->
-<!-- 			<fa-icon [icon]="prevPageIcon"></fa-icon> -->
-<!-- 		</button> -->
-<!--     <flipbook-generic [template]="pageTpl" [numPages]="this.img.length" [currentPage]="this.currentPage" [context]="{pages: img, onPageClick: onPageClick.bind(this)}" [buttonsOnBottom]="true"></flipbook-generic> -->
-<!--   </div> -->
-<!--   <flipbook-zoom *ngIf="zoomedPage != null" [url]="img[zoomedPage]" (onBackClick)="onPageClick(null)"></flipbook-zoom> -->
-<!-- </div> -->
+	</div>
+</div>

@@ -47,6 +47,13 @@ export class TurnViewerComponent implements OnInit, OnDestroy {
 				this.currentPage = this.currentPage + 1;
 				let that = this;
 				$(window).ready(function() {
+					window.addEventListener('resize', function(e) {
+						var book = document.getElementById('book');
+						book.style.width = '';
+			  		book.style.height = '';
+						console.log(book.clientWidth, book.clientHeight);
+//			  		$(book).turn('size', book.clientWidth, book.clientHeight);
+					});
 					var size = that.dimensions.findSize(that.year);
 					that.flipbook = $('#book').turn({
 						pages: that.img.length,
@@ -60,10 +67,7 @@ export class TurnViewerComponent implements OnInit, OnDestroy {
 					$('#book').bind('turning', function(event, page) {
 						$('#book').append('<audio autoplay><source src=\"' + environment.baseUrl + '/assets/audio/flip.mp3\" type=\"audio/mpeg\"/></audio>');
 					  that.addPage(page, $(this));
-						if(page > 1 && page < that.img.length) {
-							$('.previous').removeClass('hidden');
-							$('.next').removeClass('hidden');
-						} else if(page == 1) {
+						if(page == 1) {
 							$('.previous').addClass('hidden');
 						} else if(page == that.img.length) {
 							$('.next').addClass('hidden')
@@ -71,6 +75,10 @@ export class TurnViewerComponent implements OnInit, OnDestroy {
 					});
 					$('#book').bind('turned', function(event, page) {
 						$('audio').remove();
+						if(page > 1 && page < that.img.length) {
+							$('.previous').removeClass('hidden');
+							$('.next').removeClass('hidden');
+						}
 					});
 					
 					var previous = $('<div class=\"previous\" style=\"max-height: ' + size.height + 'px\">');
