@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Router, RoutesRecognized, NavigationEnd } from '@angular/router';
+import { Router, NavigationEnd } from '@angular/router';
 import { Observable, of, BehaviorSubject } from 'rxjs';
 import { filter, pairwise, map } from 'rxjs/operators';
 import { BookPage } from './book-page/book-page';
 import { environment } from '../environments/environment';
+import { YearsModel } from './years.model';
 
 @Injectable({
   providedIn: 'root'
@@ -36,7 +37,7 @@ export class MainService {
 	}
 
   getBookPagesArray(year: number, month: number): Observable<any> {	
-		let body = 'action=page_check&y='+year+'&m='+month;
+		let body = 'action=page_check&y='+year+'&m='+(month + 1);
 		let options = {
 		    headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
 		};

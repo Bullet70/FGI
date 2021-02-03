@@ -1,0 +1,32 @@
+<div id="years">
+	<div class="firstPage" *ngIf="selectedYears">
+		<div *ngFor="let year of selectedYears; index as i">
+			<div class="section">
+				<h3>
+					<a [class.disabled]="!hasMagazine(year)" (click)="selection.emit(i)">{{year}}</a>
+				</h3>
+				<span class="text-container" *ngIf="!hasMagazine(year)">Non ci sono riviste per l'anno</span>
+			</div>
+		</div>
+	</div>
+	<ng-container *ngFor="let year of selectedYears">
+		<div class="otherPages">
+			<div class="section" *ngFor="let month of firstSemester">
+				<h3>
+					<a *ngIf="hasMagazine(year, month)" [routerLink]="['/browser', year, month, 1]">{{months[month]}} {{year}}</a>
+					<span *ngIf="!hasMagazine(year, month)">{{months[month]}} {{year}}</span>
+				</h3>
+				<span class="text-container" *ngIf="!hasMagazine(year, month)">Non ci sono riviste per l'anno</span>
+			</div>
+		</div>
+		<div class="otherPages">
+			<div class="section" *ngFor="let month of secondSemester">
+				<h3>
+					<a *ngIf="hasMagazine(year, month)" [routerLink]="['/browser', year, month, 1]">{{months[month]}} {{year}}</a>
+					<span *ngIf="!hasMagazine(year, month)">{{months[month]}} {{year}}</span>
+				</h3>
+				<span class="text-container" *ngIf="!hasMagazine(year, month)">Non ci sono riviste per l'anno</span>
+			</div>
+		</div>
+	</ng-container>
+</div>

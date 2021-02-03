@@ -1,0 +1,67 @@
+#years {
+	height: 100%;
+	width: 100%;
+	transition: margin-left 0.25s ease-out;
+	flex-grow: 2;
+}
+
+.page {
+	background-image: url("/assets/img/paper.jpg");
+	text-align: center;
+  color: black;
+  width: 100%;
+  height: 100%;
+}
+
+.page > div {
+	background-size: 100%;
+	border: 1px solid white;
+	position: relative;
+	background-color: #182983;
+}
+
+.page div a, .page div span {
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+	vertical-align: middle;
+	margin: 0;
+	color: #ebc32d;
+	text-shadow: 0 0 5px #000000;
+}
+
+.page div a {
+	cursor: pointer;
+}
+
+.text-container {
+	position: relative;
+/*   top: 35%; */
+  font-weight: bold;
+	color: #ebc32d;
+}
+
+.firstPage {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+}
+
+.firstPage > div {
+	width: 50%;
+	height: 20%;
+}
+
+.firstPage .section {
+	padding: 5%;
+}
+
+.otherPages {
+	display: flex;
+	flex-direction: column;
+}
+
+.otherPages div {
+	height: 16.6%;
+}

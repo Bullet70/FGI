@@ -7,6 +7,7 @@ import { of } from 'rxjs';
 import { filter, pairwise } from 'rxjs/operators';
 import { MainService } from './main.service';
 import { environment } from '../environments/environment';
+declare var $: any;
 
 @Component({
   selector: 'app-root',
@@ -14,8 +15,9 @@ import { environment } from '../environments/environment';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-    bg: number = 0;
-    
+	bg: number = 0;
+  homeImg: string = environment.baseUrl + '/assets/img/home.png';
+	logoutImg: string = environment.baseUrl + '/assets/img/logout.png';
   faSearch = faSearch;
   faBars = faBars;
   title = 'federscherma-angular';
@@ -27,7 +29,7 @@ export class AppComponent implements OnInit {
   showTimeline: boolean = true;
 	routeParams: any;
 	viewMode: boolean = true;
-	bgImage: string = 'url(\'' + environment.baseUrl + '/assets/img/sfondo-ginnasta.jpg\')';
+	bgImage: string = 'url(\'' + environment.baseUrl + '/assets/img/2.jpg\')';
 	charClass: string = 'black';
 
   constructor(private router: Router, private route: ActivatedRoute, private location: Location, private service: MainService) {
@@ -64,10 +66,12 @@ export class AppComponent implements OnInit {
 	}
   
   doLogout() {
-	window.location.href = environment.baseUrl + '/wp-login.php?action=logout';
+		window.location.href = environment.baseUrl + '/wp-login.php?action=logout';
   }
   
   doSearch() {
+		if(!$('.sidebar').hasClass('toggled'))
+			this.toggleSidebar();
     this.router.navigateByUrl('/search/' + this.searchQuery);
   }
 
@@ -77,7 +81,8 @@ export class AppComponent implements OnInit {
   
   onSelectedDecadeChange(event) {
       console.log(event);
-      this.router.navigateByUrl('list/' + event + '/0');
+//      this.router.navigateByUrl('list/' + event + '/0');
+		this.router.navigateByUrl('years/' + event + '/1');
   }
 
 	switchMode(mode: boolean) {
@@ -87,9 +92,9 @@ export class AppComponent implements OnInit {
 	
 	change(image: string) {
 		if(image)
-			this.bgImage = 'url(\'' + environment.baseUrl + '/assets/img/' + image + '.jpg\')';
+			this.bgImage = 'url(\'' + environment.baseUrl + '/assets/img/' + (image == '2' ? 'sfondo-ginnasta' : image) + '.jpg\')';
 		else
-			this.bgImage = 'url(\'' + environment.baseUrl + '/assets/img/sfondo-ginnasta.jpg\')';
+			this.bgImage = 'url(\'' + environment.baseUrl + '/assets/img/2.jpg\')';
 		if(image == '8')
 			this.charClass = 'gold';
 		else

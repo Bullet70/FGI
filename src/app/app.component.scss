@@ -3,12 +3,17 @@ $sidebar-width: 15em;
 .root {
 	display: flex;
 	flex-direction: row;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+	max-width: 100vw;
+	max-height: 100vh;
+//	overflow-y: auto;
 }
 
-@media only screen and (max-width: 900px) {
-	.sidebar.toggled {
-		display: none;
-	}
+.nav a img {
+	padding: 1em;
 }
 
 .sidebar-darken {
@@ -33,7 +38,6 @@ $sidebar-width: 15em;
 }
 
 .sidebar {
-/*   position: absolute; */
 /*   top: 0; */
 /*   bottom: 0; */
 /*   left: -$sidebar-width; */
@@ -50,14 +54,9 @@ $sidebar-width: 15em;
 
 /*   opacity: 0; */
 /*   z-index: 101; */
-	width: 12vw;
+//	width: 12vw;
 	height: 100vh;
 	z-index: 1000;
-}
-
-.sidebar.toggled {
-/*   left: 0; */
-/*   opacity: 1; */
 }
 
 .nav-item {
@@ -76,11 +75,23 @@ $sidebar-width: 15em;
 	padding: 0 1rem;
 }
 
+.nav-link img {
+	padding: 0;
+}
+
 .sidebar-toggle {
   position: absolute;
   top: 1em;
-  left: 1em;
+  right: 1em;
   z-index: 99;
+}
+
+.root > .sidebar-toggle {
+	left: 1em;
+}
+
+.sidebar-toggle.toggled, .inner-toggle {
+	display: none;
 }
 
 .sponsor {
@@ -105,19 +116,25 @@ $sidebar-width: 15em;
 }
 
 .main-content {
-	width: 87vw;
 	height: 100vh;
+	max-height: 100vh;
 //	background-image: url("https://dev.esinware.it/federginnastica/assets/img/sfondo-ginnasta.jpg");
-//  background: url("/assets/img/sfondo-ginnasta.jpg") no-repeat center center fixed; 
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
+//  background: url("/assets/img/sfondo-ginnasta.jpg") no-repeat center center fixed;
+//	background-color: rgba(255, 255, 255, 0.7);
+	display: flex;
+	flex-direction: column;
 }
 
 .content {
-	background-color: rgba(255, 255, 255, 0.7);
-	height: 100vh;
+	position: relative;
+	flex-grow: 2;
+	max-height: 90vh;
+	height: 90vh;
+	padding: 2%;
+}
+
+.timeline {
+	height: 13%;
 }
 
 .sponsor span {
@@ -134,4 +151,50 @@ $sidebar-width: 15em;
 
 ::ng-deep .gold {
 	color: #af8002;
+}
+
+@media only screen and (max-width: 1023.9px) {
+	.sidebar.toggled {
+		display: none;
+	}
+	
+	.sidebar {
+		position: absolute;
+		width: 60vw;
+	}
+	
+	.inner-toggle {
+		display: block;
+	}
+	
+	.inner-toggle.toggled {
+		display: none;
+	}
+	
+	.main-content {
+		width: 100vw;
+	}
+	
+	.nav a img {
+		width: 10em;
+	}
+}
+
+@media only screen and (min-width: 1024px) {	
+	.main-content {
+		width: 88vw;
+	}
+	
+	.sidebar {
+		position: relative;
+		width: 15vw;
+	}
+	
+	.inner-toggle {
+		display: none;
+	}
+	
+	.nav a img {
+//		width: 100%;
+	}
 }

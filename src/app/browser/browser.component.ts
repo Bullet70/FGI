@@ -17,7 +17,7 @@ export class BrowserComponent implements OnInit {
   decade: number;
   year: number;
   month: number;
-  currentPage: number = 0;
+  currentPage: number = 1;
 	img: string[];
 	loaded: string[];
   state: number;
@@ -51,13 +51,11 @@ export class BrowserComponent implements OnInit {
 	}
   
   goBack() {
-      const previousUrl = this.mainService.previousUrl;
-		console.log('------' + previousUrl + '----');
-      if(previousUrl && previousUrl.startsWith('/list')) {
-          this.router.navigateByUrl('/list/' + Math.floor((this.year - 1900) / 10) + '/' + (((this.year % 10) * 2) + 1));
-      } else {
-          this.router.navigateByUrl(previousUrl);
-      }
+		const previousUrl = this.mainService.previousUrl;
+		if(previousUrl && previousUrl.startsWith('/years')) {
+			this.router.navigateByUrl('/years/' + Math.floor((this.year - 1900) / 10) + '/' + (2 + ((this.year - 1900) % 10) * 2));
+		} else {
+			this.router.navigateByUrl(previousUrl);
+		}
   }
-
 }

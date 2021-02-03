@@ -1,10 +1,17 @@
 <div id="tl-container">
-  <ng-scrollbar class="tl-scrollable" barClass="scroll-bar" thumbClass="scroll-thumbs" [autoHide]="true" [autoUpdate]="true" [disableOnBreakpoints]="false" [trackX]="true" [trackY]="false">
-    <div class="tl-step" *ngFor="let d of numDecades | range" [ngClass]="{'active': selectedDecade == d}" (click)="onClick(d)">
-      <div class="tl-circle">
-        <h2 class="tl-circle-title">{{(startDecade + 10*d)}}-{{(startDecade + 10*d) + 9}}</h2>
+	<div id="tl-line">
+<!--   <ng-scrollbar class="tl-scrollable" barClass="scroll-bar" thumbClass="scroll-thumbs" [autoHide]="true" [autoUpdate]="true" [disableOnBreakpoints]="false" [trackX]="true" [trackY]="false"> -->
+     <div *ngFor="let d of numDecades | range" class="tl-step" [ngClass]="{'active': selectedDecade == d}" (click)="onClick(d)">
+    	<div class="circle-row">
+	      <div class="tl-circle"></div>
       </div>
-    </div>
-    <div id="tl-line"></div>
-  </ng-scrollbar>
+      <div>
+        <span class="tl-circle-title">{{(startDecade + 10*d)}}</span>
+        <span class="hyphen">-</span>
+        <span class="tl-circle-title">{{(startDecade + 10*d) + 9}}</span>
+      </div>
+  	</div>
+<!--   </ng-scrollbar> -->
+	</div>
+<!--     <div id="tl-line"></div> -->
 </div>

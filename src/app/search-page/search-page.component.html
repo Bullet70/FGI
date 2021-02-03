@@ -16,9 +16,9 @@
   	
     
 	<div class="list-group" *ngIf="searchResults">
-		<a *ngFor="let item of searchResults.resultSet" class="list-group-item list-group-item-action flex-column align-items-start" [routerLink]="['/browser', item.values.year[0], item.values.month[0], item.values.page[0]]">
+		<a *ngFor="let item of searchResults.resultSet" class="list-group-item list-group-item-action flex-column align-items-start" [routerLink]="['/browser', item.values.year[0], item.values.month[0] - 1, item.values.page[0]]">
 	   		<div class="d-flex w-100 justify-content-between"><h5 class="mb-1">{{ item.values.title[0] }}</h5></div>
-	        <p class="mb-1" innerHTML="{{ item.values.abstract[0] }}" style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;"></p>
+<!-- 	        <p class="mb-1" innerHTML="{{ item.values.abstract[0] }}" style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;"></p> -->
 		</a>
 	</div>
   </div>

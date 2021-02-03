@@ -4,7 +4,7 @@
 
 .btn.left {
 	position: absolute;
-	left: 5em;
+	right: 0;
   z-index: 999;
 }
 
@@ -34,10 +34,10 @@
 
 .zoom {
 	position: relative;
-	height: 90vh;
+	height: 95%;
 	z-index: 20;
 }
 
-//::ng-deep .zoom img {
-//	z-index: 10;
-//}
+.button-container {
+	position: relative;
+}

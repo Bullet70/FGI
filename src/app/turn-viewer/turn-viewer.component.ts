@@ -14,13 +14,11 @@ declare var $: any;
   styleUrls: ['./turn-viewer.component.scss']
 })
 export class TurnViewerComponent implements OnInit, OnDestroy {
-//  faSpinner = faSpinner;
-//  faExclamationTriangle = faExclamationTriangle;
 	
   decade: number;
   @Input() year: number;
   @Input() month: number;
-  @Input() currentPage: number = 0;
+  @Input() currentPage: number = 1;
 	@Output() currentPageChange: EventEmitter<number> = new EventEmitter<number>();
 	img: string[];
 	loaded: string[];
@@ -32,7 +30,6 @@ export class TurnViewerComponent implements OnInit, OnDestroy {
 	dimensions: BookRange = new BookRange();
 
   constructor(private mainService: MainService, private route: ActivatedRoute, private router: Router) {
-    
   }
 
   ngOnInit() {
@@ -44,68 +41,16 @@ export class TurnViewerComponent implements OnInit, OnDestroy {
 				for(var index = start; index <= (start + 5); index++) {
 					this.loaded[index] = this.img[index];
 				}
-				this.currentPage = this.currentPage + 1;
-				let that = this;
-				$(window).ready(function() {
-					window.addEventListener('resize', function(e) {
-						var book = document.getElementById('book');
-						book.style.width = '';
-			  		book.style.height = '';
-						console.log(book.clientWidth, book.clientHeight);
-//			  		$(book).turn('size', book.clientWidth, book.clientHeight);
-					});
-					var size = that.dimensions.findSize(that.year);
-					that.flipbook = $('#book').turn({
-						pages: that.img.length,
-						page: that.currentPage,
-						autocenter: true,
-						elevation: 20,
-						duration: 1500,
-						height: size.height,
-						width: size.width
-					});
-					$('#book').bind('turning', function(event, page) {
-						$('#book').append('<audio autoplay><source src=\"' + environment.baseUrl + '/assets/audio/flip.mp3\" type=\"audio/mpeg\"/></audio>');
-					  that.addPage(page, $(this));
-						if(page == 1) {
-							$('.previous').addClass('hidden');
-						} else if(page == that.img.length) {
-							$('.next').addClass('hidden')
-						}
-					});
-					$('#book').bind('turned', function(event, page) {
-						$('audio').remove();
-						if(page > 1 && page < that.img.length) {
-							$('.previous').removeClass('hidden');
-							$('.next').removeClass('hidden');
-						}
-					});
-					
-					var previous = $('<div class=\"previous\" style=\"max-height: ' + size.height + 'px\">');
-					if(that.currentPage == 1)
-						previous.addClass('hidden');
-					var next = $('<div class=\"next\" style=\"max-height: ' + size.height + 'px\">');
-					if(that.currentPage == (that.img.length))
-						next.addClass('hidden');
-					$('#book').prepend(previous).append(next);
-					previous.click(function() {
-						that.currentPage = that.currentPage - 1;
-						that.currentPageChange.emit(that.currentPage - 1);
-						$('#book').turn('previous');
-					});
-					next.click(function() {
-						that.currentPage = that.currentPage + 1;
-						that.currentPageChange.emit(that.currentPage - 1);
-						$('#book').turn('next');
-					});
-      	});
+				console.log(this.year);
+//				this.currentPage = this.currentPage + 1;
+				this.initBook();
 			});
   }
 
 	ngOnDestroy() {
 		console.log('Destroying new browser');
-		this.flipbook.turn('destroy');
-		$('.previous, .next').remove();
+//		this.flipbook.turn('destroy');
+//		$('.previous, .next').remove();
 	}
 
 	addPage(page, book) {
@@ -137,4 +82,83 @@ export class TurnViewerComponent implements OnInit, OnDestroy {
       }
   }
 
+	private initBook() {
+				let that = this;
+				$(window).ready(function() {
+					var book = document.getElementById('book');
+					var height = document.getElementById('wrapperBook').clientHeight;
+					var width = document.getElementById('wrapperBook').clientWidth - 50;
+					var ratioHeight = height;
+					var ratioWidth = height * 0.70 * 2;
+					if(width < ratioWidth) {
+						ratioWidth = width;
+						ratioHeight = (width / 2) / 0.70;
+					}
+					var size = that.dimensions.findSize(that.year);
+					that.flipbook = $('#book').turn({
+						display: document.getElementById('wrapperBook').clientWidth < 600 ? 'single' : 'double',
+						pages: that.img.length,
+						page: that.currentPage,
+						autocenter: true,
+						elevation: 20,
+						duration: 1500,
+						height: ratioHeight,
+						width: ratioWidth - 10
+					});
+					$('#book').bind('turning', function(event, page) {
+						$('#book').append('<audio autoplay><source src=\"' + environment.baseUrl + '/assets/audio/flip.mp3\" type=\"audio/mpeg\"/></audio>');
+					  that.addPage(page, $(this));
+						if(page == 1) {
+							$('.previous').addClass('hidden');
+						} else if(page == that.img.length) {
+							$('.next').addClass('hidden')
+						}
+					});
+					$('#book').bind('turned', function(event, page) {
+						$('audio').remove();
+						if(page > 1 && page < that.img.length) {
+							$('.previous').removeClass('hidden');
+							$('.next').removeClass('hidden');
+						}
+					});
+					
+					var previous = $('.previous');
+					previous.css('height', ratioHeight + 'px');
+					if(that.currentPage == 1)
+						previous.addClass('hidden');
+					previous.click(function() {
+						that.currentPage = that.currentPage - 1;
+						that.currentPageChange.emit(that.currentPage - 1);
+						$('#book').turn('previous');
+					});
+					var next = $('.next');
+					next.css('height', ratioHeight + 'px');
+					if(that.currentPage == (that.img.length))
+						next.addClass('hidden');
+					next.click(function() {
+						that.currentPage = that.currentPage + 1;
+						that.currentPageChange.emit(that.currentPage - 1);
+						$('#book').turn('next');
+					});
+					window.addEventListener('resize', function(e) {
+						book.style.width = '';
+			  		book.style.height = '';
+						var height = document.getElementById('wrapperBook').clientHeight;
+						var width = document.getElementById('wrapperBook').clientWidth - 50;
+						var ratioHeight = height;
+						var ratioWidth = height * 0.70 * 2;
+						if(width < ratioWidth) {
+							ratioWidth = width;
+							ratioHeight = (width / 2) / 0.70;
+						}
+						previous.css('height', ratioHeight + 'px');
+						next.css('height', ratioHeight + 'px');
+						if(width < ratioWidth)
+							$(book).turn('display', 'single');
+						else
+							$(book).turn('display', 'double');
+			  		$(book).turn('size', ratioWidth - 10, ratioHeight);
+					});
+      	});
+	}
 }

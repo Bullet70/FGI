@@ -1,13 +1,18 @@
-<div class="wrapper-book">
+<div class="wrapper-book" id="wrapperBook">
   <div class="aspect">
-    <div class="aspect-inner">
+    <div class="aspect-inner" id="turnBox">
+    	<div class="previous"></div>
 			<div id="book">
-			<ng-container *ngFor="let page of loaded; index as i">
-				<div *ngIf="page" class="page {{(i % 2) == 0 ? 'odd' : 'even'}} p{{i+1}}" id="page-{{i+1}}">
-					<img src="{{page}}" (click)="onPageClick(page)"/>
-				</div>
-			</ng-container>
+				<ng-container *ngFor="let page of loaded; index as i">
+					<div *ngIf="page" class="page {{(i % 2) == 0 ? 'odd' : 'even'}} p{{i+1}}" id="page-{{i+1}}">
+						<div class="imgHolder">
+							<img src="{{page}}"/>
+						</div>
+						<div class="zoomable" (click)="onPageClick(page)"></div>
+					</div>
+				</ng-container>
 			</div>
+    	<div class="next"></div>
 		</div>
 	</div>
 </div>

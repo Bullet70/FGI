@@ -13,23 +13,12 @@
     </ngb-alert>
   </div>
 </div>
-<div id="book-container" [ngClass]="{'hidden': zoomedPage != null}">
-  <div>
-		<button class="btn btn-light btn-lg left" (click)="goBack()">
-			<fa-icon [icon]="prevPageIcon"></fa-icon>
-		</button>
-<!--     <flipbook-generic [template]="pageTpl" [numPages]="this.img.length" [currentPage]="this.currentPage" [context]="{pages: img, onPageClick: onPageClick.bind(this)}" [buttonsOnBottom]="true"></flipbook-generic> -->
-  </div>
-	<div id="flipbook" [ngClass]="{'hidden': zoomedPage != null}">
-		<app-turn-viewer *ngIf="mode" [year]="year" [month]="month" [(currentPage)]="currentPage" (zoomedPage)="zoomedPage = $event" (state)="state = $event"></app-turn-viewer>
-		<app-book-viewer *ngIf="!mode" [year]="year" [month]="month" [(currentPage)]="currentPage" (state)="changeState($event)" (zoomedPage)="zoomedPage = $event"></app-book-viewer>
-<!-- 		<ng-container *ngFor="let page of loaded; index as i"> -->
-<!-- 			<div *ngIf="page" class="page {{(i % 2) == 0 ? 'odd' : 'even'}} p{{i}}" id="page-{{i}}" (click)="onPageClick(i)"> -->
-<!-- 				<img src="{{page}}"/> -->
-<!-- 			</div> -->
-<!-- 		</ng-container> -->
-	</div>
+<div class="button-container">
+	<button class="btn btn-light btn-lg left" (click)="goBack()">
+		<fa-icon [icon]="prevPageIcon"></fa-icon>
+	</button>
 </div>
+<app-turn-viewer *ngIf="mode && zoomedPage == null" [year]="year" [month]="month" [(currentPage)]="currentPage" (zoomedPage)="zoomedPage = $event" (state)="state = $event"></app-turn-viewer>
 <div *ngIf="zoomedPage != null" class="zoom">
 	<flipbook-zoom *ngIf="zoomedPage != null" [url]="zoomedPage" (onBackClick)="onPageClick(null)"></flipbook-zoom>
 </div>

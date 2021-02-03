@@ -1,6 +1,7 @@
 .inccont {
 	position: relative;
-	height: 90vh;
+	height: 100%;
+	width: 100%;
 }
 
 .incipit img {
@@ -10,17 +11,18 @@
 }
 
 .text {
-	font-size: 19pt;
+/* 	font-size: 19pt; */
 	/*color: #ebc32d !important;*/
 /* 	color: black; */
+	color: white;
 	text-align: center;
 }
 
 .incipit {
 	position: absolute;
-	right: 4rem;
-	width: 45vw;
-	margin-top: 1.5em !important;
+/* 	right: 4rem; */
+/* 	width: 45%; */
+/* 	margin-top: 1.5em !important; */
 }
 
 .incipit h1, .incipit h2, .incipit h3, .incipit h4 {
@@ -41,14 +43,21 @@
 .sx {
 	clear: both;
 	position: absolute;
-	padding-left: 2vw;
-	width: 25vw;
-	bottom: 5rem;
+	width: 45%;
+	bottom: 3%;
 	font-style: italic;
 }
 
 .oneline {
 	word-break: none;
+}
+
+.incipit h3 {
+	font-size: 130%;
+}
+
+.sx h3 {
+	font-size: 90%;
 }
 
 @media only screen and (max-width: 1366px) {

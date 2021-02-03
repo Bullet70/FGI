@@ -7,10 +7,10 @@ img {
     max-height: 100%;
 }
 
-#flipbook{
-    width:880px;
-    height:80vh;
-}
+/* #flipbook{ */
+/*     width:880px; */
+/*     height:80vh; */
+/* } */
 
 #flipbook .page{
 /*     width:440px; */
@@ -21,9 +21,9 @@ img {
     text-align:center;
 }
 
-#flipbook .page img {
-	height: auto;
-}
+/* #flipbook .page img { */
+/* 	height: auto; */
+/* } */
 
 #flipbook .page-wrapper{
     -webkit-perspective:2000px;

@@ -3,12 +3,15 @@
 }
 
 .tl-content-container {
-  padding-left: 200px;
-  position: absolute;
-  top: 0;
-  bottom: 10em;
-  left: 0;
-  right: 0;
+//  padding-left: 200px;
+//  position: absolute;
+//  top: 0;
+//  bottom: 10em;
+//  left: 0;
+//  right: 0;
+	height: 90vh;
+	display: flex;
+	flex-direction: row;
 }
 
 .text-container {

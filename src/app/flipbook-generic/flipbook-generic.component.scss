@@ -7,6 +7,11 @@
   transition: 0.5s;
 }
 
+div.rowFlip {
+	flex-grow: 1;
+	display: inline-block;
+}
+
 @media screen and (max-width: 900px) {
   .flipbook-container {
     width: 60%;
@@ -174,17 +179,17 @@
 
 // Bottoni cambio pagina
 .button-container {
-	padding-left: 200px;
-  display: flex;
+//	padding-left: 200px;
+//  display: flex;
   align-items: center;
   justify-content: center;
-  width: calc(100% - 200px);
+//  width: calc(100% - 200px);
   height: 100%;
-  position: absolute;
+  position: relative;
 }
 
 .button-container button {
-  position: absolute;
+  position: relative;
 }
 
 .button-container button.left {

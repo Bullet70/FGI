@@ -1,30 +1,15 @@
 <!-- BOTTONI -->
-<div [ngClass]="{
-  'button-container': buttonsOnBottom == false,
-  'button-container-bottom': buttonsOnBottom == true
-}">
+<div class="rowFlip" [ngClass]="{'button-container': buttonsOnBottom == false, 'button-container-bottom': buttonsOnBottom == true}">
   <button class="btn btn-light btn-lg left" (click)="turnTo('prev')" *ngIf="!isCurrentPage('first')">
     <fa-icon [icon]="prevPageIcon"></fa-icon>
-  </button>
-  <button class="btn btn-light btn-lg right" (click)="turnTo('next')" *ngIf="!isCurrentPage('last')">
-    <fa-icon [icon]="nextPageIcon"></fa-icon>
   </button>
 </div>
 
 <!-- SFOGLIATORE -->
-<div class="flipbook-container" [ngClass]="{
-  'firstpage': currentPageR <= 0,
-  'lastpage': isCurrentPage('last') == true && numPages % 2 == 0
-}">
-  <div class="flip-container" *ngFor="let p of getRange(); let pnum = index" [ngClass]="{
-    'hidden': isPageShowable(pnum) == false,
-    'flipped': pnum == currentPageL
-  }">
+<div class="flipbook-container rowFlip" [ngClass]="{'firstpage': currentPageR <= 0, 'lastpage': isCurrentPage('last') == true && numPages % 2 == 0}">
+  <div class="flip-container" *ngFor="let p of getRange(); let pnum = index" [ngClass]="{'hidden': isPageShowable(pnum) == false, 'flipped': pnum == currentPageL}">
     <div class="flipper">
-      <div [ngClass]="{
-        'back': pnum == currentPageL,
-        'front': pnum == currentPageR  
-      }">
+      <div [ngClass]="{'back': pnum == currentPageL, 'front': pnum == currentPageR}">
         <ng-container *ngTemplateOutlet="template;context:{ ctx: context, pnum: pnum }"></ng-container>
       </div>
     </div>
@@ -55,4 +40,10 @@
       </div>
     </div>
   </div>
+</div>
+
+<div class="button-container rowFlip" [ngClass]="{'button-container': buttonsOnBottom == false, 'button-container-bottom': buttonsOnBottom == true}">
+  <button class="btn btn-light btn-lg right" (click)="turnTo('next')" *ngIf="!isCurrentPage('last')">
+    <fa-icon [icon]="nextPageIcon"></fa-icon>
+  </button>
 </div>
